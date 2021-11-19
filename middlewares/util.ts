@@ -7,7 +7,8 @@ export const getToken = (existed: any) => {
       userId: existed._id,
       userFirstName: existed.firstName,
       userLastName: existed.lastName,
-      userUserName: existed.userName
+      userUserName: existed.userName,
+      isAdmin: existed.isAdmin
     },
     `${process.env.JWT_KEY}`,
     { expiresIn: "14d" }

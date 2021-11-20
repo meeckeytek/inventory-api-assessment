@@ -24,6 +24,10 @@ export const addToCart = async (req: any, res: any) => {
     return res.status(404).json({ message: msg.notFound });
   }
 
+if (product.quantity < 1) {
+    return res.status(404).json({ message: msg.notFound });
+  }
+
   let existingCart: any;
   let eachProduct: any;
   try {
@@ -50,10 +54,9 @@ export const addToCart = async (req: any, res: any) => {
     await cart.save();
     return res.status(201).json({ message: "product added to cart" });
   } else {
-    // console.log(eachProduct)
     for (eachProduct of existingCart.products)
-      if (eachProduct.productId === productId) {
-        eachProduct.quantity = eachProduct.quantity + 1;
+      if (JSON.stringify(eachProduct.productId) === JSON.stringify(productId)) {
+        eachProduct.quantity += 1;
         existingCart.totalPrice += eachProduct.price;
         await existingCart.save();
         return res.status(200).json({ message: "product quantity updated" });
@@ -105,7 +108,7 @@ export const checkOut = async (req: any, res: any) => {
   order.status = "Success" || order.status;
 
   try {
-    order.save();
+    await order.save();
   } catch (error) {
     return res.status(500).json({ message: msg.serverError });
   }
@@ -133,7 +136,7 @@ export const viewOrderDetails = async (req: any, res: any) => {
 export const viewAllOrders = async (req: any, res: any) => {
   let order: any;
   try {
-    order = await Cart.find();
+    order = await Cart.find({customerId: req.user.userId});
   } catch (error) {
     return res.status(500).json({ message: msg.serverError });
   }

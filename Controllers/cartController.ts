@@ -10,7 +10,7 @@ export const defaultMsg = async (req: string, res: any) => {
 
 //Adding product to cart controller
 export const addToCart = async (req: any, res: any) => {
-  const { productId } = req.params;
+  const { productId } = req.body;
 
   let product: any;
 

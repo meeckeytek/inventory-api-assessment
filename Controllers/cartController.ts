@@ -52,7 +52,7 @@ export const addToCart = async (req: any, res: any) => {
   } else {
     // console.log(eachProduct)
     for (eachProduct of existingCart.products)
-      if (eachProduct.productId === pId) {
+      if (eachProduct.productId === productId) {
         eachProduct.quantity = eachProduct.quantity + 1;
         existingCart.totalPrice += eachProduct.price;
         await existingCart.save();

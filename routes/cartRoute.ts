@@ -20,6 +20,6 @@ cartRoute.get('/checkOut', isAuth, cartController.checkOut);
 cartRoute.get('/viewOrderDetails/:orderId', isAuth, cartController.viewOrderDetails);
 
 //Fetching all orders route
-cartRoute.post('/allOrders', isAuth, cartController.viewAllOrders);
+cartRoute.get('/allOrders', isAuth, cartController.viewAllOrders);
 
 export default cartRoute;

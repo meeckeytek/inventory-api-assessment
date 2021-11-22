@@ -29,6 +29,6 @@ userRoute.patch('/editUser/:uId', isAuth, [
 
 
 // User details route
-userRoute.get('/getUserById', isAuth, userController.userDetials);
+userRoute.get('/userDetails', isAuth, userController.userDetials);
 
 export default userRoute;

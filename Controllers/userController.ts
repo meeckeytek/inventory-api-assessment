@@ -129,7 +129,7 @@ export const userDetials = async (req: any, res: any) => {
   let user: any;
 
   try {
-    user = await User.findById(req.params.uId, '-password');
+    user = await User.findById(req.user.userId, '-password');
   } catch (error) {
     return res.status(500).json({ message: msg.serverError });
   }
